@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Andika New Basic", "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* Removes the default background color of the autofill fields */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
