@@ -12,11 +12,7 @@ import SearchComponent from "../components/navbar/search/search.component";
 
 const PrivateLayout = ({ children }) => {
   return (
-    <Container
-      maxWidth="lg"
-      disableGutters={true}
-      // style={{ border: "1px solid red" }}
-    >
+    <Container maxWidth="lg" disableGutters={true}>
       <AppBar position="static" elevation={0}>
         <Toolbar>
           <MainMenuComponent />

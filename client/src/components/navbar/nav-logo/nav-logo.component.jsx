@@ -7,6 +7,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "white",
     width: "200px",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    display: "flex",
+    alignSelf: "stretch",
   },
 }));
 
@@ -15,7 +19,7 @@ const NavLogoComponent = () => {
 
   return (
     <div className={classes.root}>
-      <Logo />
+      <Logo style={{ alignSelf: "center" }} />
     </div>
   );
 };

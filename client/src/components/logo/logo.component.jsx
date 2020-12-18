@@ -7,11 +7,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const LogoComponent = () => {
+const LogoComponent = ({...props}) => {
 
   const classes = useStyles()
 
-  return <img src="./images/logo.png" alt="" className={classes.root} />;
+  return <img src="./images/logo.png" alt="" className={classes.root} {...props} />;
 };
 
 export default LogoComponent;
