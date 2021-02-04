@@ -9,18 +9,20 @@ import {
   emailSignInStart,
 } from "../../redux/user/user.actions";
 
-const SignInPage = ({ emailSignInStart, googleSignInStart }) => (
-  <Layout>
-    <SignIn
-      emailSignInStart={emailSignInStart}
-      googleSignInStart={googleSignInStart}
-    />
-  </Layout>
-);
+const SignInPage = ({ emailSignInStart, googleSignInStart }) => {
+  return (
+    <Layout>
+      <SignIn
+        emailSignInStart={emailSignInStart}
+        googleSignInStart={googleSignInStart}
+      />
+    </Layout>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
-  emailSignInStart: (email, password) =>
+  emailSignInStart: ({email, password}) =>
     dispatch(emailSignInStart({ email, password })),
 });
 

@@ -14,9 +14,22 @@ export const signInFailure = error => ({
   payload: error
 });
 
-export const emailSignInStart = emailAndPassword =>({
+export const emailSignInStart = emailAndPassword => ({
   type: UserActionTypes.EMAIL_SIGN_IN_START,
   payload: emailAndPassword
+});
+
+export const tokenRequestStart = () => ({
+  type: UserActionTypes.TOKEN_REQUEST_START,
+});
+export const tokenRequestSuccess = token => ({
+  type: UserActionTypes.TOKEN_REQUEST_SUCCESS,
+  payload: token
+});
+
+export const tokenRequestFailure = error => ({
+  type: UserActionTypes.TOKEN_REQUEST_FAILURE,
+  payload: error
 });
 
 export const checkUserSession = () => ({

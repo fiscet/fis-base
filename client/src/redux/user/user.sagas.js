@@ -5,6 +5,8 @@ import UserActionTypes from "./user.types";
 import {
   signInSuccess,
   signInFailure,
+  tokenRequestSuccess,
+  tokenRequestFailure,
   signOutSuccess,
   signOutFailure,
   signUpSuccess,
@@ -18,7 +20,7 @@ import {
   getCurrentUser,
 } from "../../firebase/firebase.utils";
 
-export function* getSnapshotFromUserAuth(userAuth: Object, additionalData) {
+export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
     const userRef = yield call(
       createUserProfileDocument,
@@ -27,6 +29,7 @@ export function* getSnapshotFromUserAuth(userAuth: Object, additionalData) {
     );
     const userSnapshot = yield userRef.get();
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    yield getToken();
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -41,12 +44,22 @@ export function* signInWithGoogle() {
   }
 }
 
-export function* signInWithEmail({ payload: { email, password } }) {
+export function* signInWithEmail({ payload }) {
   try {
-    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    const { user } = yield auth.signInWithEmailAndPassword(payload.email, payload.password);
+
     yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error));
+  }
+}
+
+export function* getToken() {
+  try {
+    const token = yield auth.currentUser.getIdToken(true);
+    yield put(tokenRequestSuccess(token));
+  } catch (error) {
+    yield put(tokenRequestFailure(error));
   }
 }
 
@@ -82,12 +95,19 @@ export function* signInAfterSignUp({ payload: { user, additionalData } }) {
   yield getSnapshotFromUserAuth(user, additionalData);
 }
 
+// -------------------------------------------------
+
+
 export function* onGoogleSignInStart() {
   yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
 
 export function* onEmailSignInStart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
+}
+
+export function* onTokenRequestStart() {
+  yield takeLatest(UserActionTypes.TOKEN_REQUEST_START, getToken);
 }
 
 export function* onCheckUserSession() {
@@ -110,6 +130,7 @@ export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
+    call(onTokenRequestStart),
     call(onCheckUserSession),
     call(onSignOutStart),
     call(onSignUpStart),

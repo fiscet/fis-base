@@ -18,7 +18,8 @@ export const restrictedRoutes = [
     path: '/login',
     exact: true,
     component: SignIn,
-  },{
+  },
+  {
     id: 'register',
     path: '/register',
     exact: true,

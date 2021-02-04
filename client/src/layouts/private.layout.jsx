@@ -1,5 +1,10 @@
 import React from "react";
 
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../redux/user/user.selectors";
+import { signOutStart } from "../redux/user/user.actions";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Container from "@material-ui/core/Container";
@@ -10,12 +15,15 @@ import MainMenuComponent from "../components/navbar/main-menu/main-menu.componen
 import SecondaryMenuComponent from "../components/navbar/secondary-menu/secondary-menu.component";
 import SearchComponent from "../components/navbar/search/search.component";
 
-const PrivateLayout = ({ children }) => {
+const PrivateLayout = ({ currentUser, onLogout, children }) => {
+
+  // console.log({ currentUser });
+
   return (
     <Container maxWidth="lg" disableGutters={true}>
       <AppBar position="static" elevation={0}>
         <Toolbar>
-          <MainMenuComponent />
+          <MainMenuComponent onLogout={onLogout} />
 
           <LogoComponent />
 
@@ -31,4 +39,13 @@ const PrivateLayout = ({ children }) => {
   );
 };
 
-export default PrivateLayout;
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLogout: () => dispatch(signOutStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateLayout);

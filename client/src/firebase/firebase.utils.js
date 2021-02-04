@@ -5,6 +5,7 @@ import 'firebase/auth';
 const config = {
   apiKey: "AIzaSyDm1Y75V65nxQNtEZgs6K_MstObcqNR2JE",
   authDomain: "fiscourses.firebaseapp.com",
+  // authDomain: "fiscourses.firebaseapp.com",
   databaseURL: "https://fiscourses.firebaseio.com",
   projectId: "fiscourses",
   storageBucket: "fiscourses.appspot.com",
@@ -13,6 +14,7 @@ const config = {
 };
 
 firebase.initializeApp(config);
+firebase.auth().useEmulator('http://localhost:9099/');
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
