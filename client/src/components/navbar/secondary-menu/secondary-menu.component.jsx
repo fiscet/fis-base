@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SecondaryMenuComponent = () => {
+const SecondaryMenuComponent = ({onLogout}) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const classes = useStyles();
@@ -62,6 +62,7 @@ const SecondaryMenuComponent = () => {
       </MenuItem>
       <MenuItem onClick={handleClose}>Profile</MenuItem>
       <MenuItem onClick={handleClose}>My account</MenuItem>
+      <MenuItem onClick={onLogout}>Logout</MenuItem>
     </Menu>
   );
 

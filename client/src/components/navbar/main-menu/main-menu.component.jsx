@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MainMenu = ({onLogout}) => {
+const MainMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const classes = useStyles();
@@ -43,7 +43,7 @@ const MainMenu = ({onLogout}) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={onLogout}>Logout</MenuItem>
+        <MenuItem>Menu item</MenuItem>
       </Menu>
     </div>
   );

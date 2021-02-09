@@ -23,7 +23,7 @@ const PrivateLayout = ({ currentUser, onLogout, children }) => {
     <Container maxWidth="lg" disableGutters={true}>
       <AppBar position="static" elevation={0}>
         <Toolbar>
-          <MainMenuComponent onLogout={onLogout} />
+          <MainMenuComponent />
 
           <LogoComponent />
 
@@ -31,7 +31,7 @@ const PrivateLayout = ({ currentUser, onLogout, children }) => {
 
           <Box flexGrow={1} />
 
-          <SecondaryMenuComponent />
+          <SecondaryMenuComponent onLogout={onLogout} />
         </Toolbar>
       </AppBar>
       <div>{children}</div>
